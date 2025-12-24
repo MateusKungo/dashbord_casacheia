@@ -1,0 +1,12 @@
+import Login from "@/components/item-login/itemlogin";
+
+
+
+export default function Home() {
+  return (
+    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
+      <h1>Casa cheia</h1>
+  
+    </div>
+  );
+}
