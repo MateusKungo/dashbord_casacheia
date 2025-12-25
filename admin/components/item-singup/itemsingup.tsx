@@ -18,6 +18,8 @@ import { Input } from "@/components/ui/input"
 import Link from "next/link"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Loader2 } from "lucide-react"
+import { toast } from "sonner"
+import { BASE_URL } from "@/lib/api"
 
 // Schema de validação com Zod
 const signupSchema = z.object({
@@ -55,7 +57,6 @@ type SignupFormValues = z.infer<typeof signupSchema>
 export default function Signup() {
     const router = useRouter()
     const [isLoading, setIsLoading] = useState(false)
-    const [serverError, setServerError] = useState<string | null>(null)
 
     // Inicializar react-hook-form com Zod
     const form = useForm<SignupFormValues>({
@@ -82,14 +83,13 @@ export default function Signup() {
     // Função de submit
     const onSubmit = async (data: SignupFormValues) => {
         setIsLoading(true)
-        setServerError(null)
 
         try {
             // Aqui você faria a chamada à API para criar a conta
             console.log("Dados validados para cadastro:", data)
             
             // Exemplo de chamada à API
-            const response = await fetch('https://casa-fscp.onrender.com/api/auth/register', {
+            const response = await fetch(`${BASE_URL}/auth/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -110,15 +110,19 @@ export default function Signup() {
             const result = await response.json()
             
             // Sucesso - redirecionar ou mostrar mensagem
-            alert("Conta criada com sucesso!")
+            toast.success("Conta criada com sucesso!", {
+                description: "Você será redirecionado para a página de login.",
+            })
             router.push('/auth/login')
             
             // Limpar formulário
             form.reset()
 
         } catch (error) {
-            console.error("Erro no cadastro:", error)
-            setServerError(error instanceof Error ? error.message : "Erro ao criar conta. Tente novamente.")
+            const errorMessage = error instanceof Error ? error.message : "Erro ao criar conta. Tente novamente."
+            toast.error("Erro ao criar conta", {
+                description: errorMessage,
+            })
         } finally {
             setIsLoading(false)
         }
@@ -216,13 +220,6 @@ export default function Signup() {
                                 </FormItem>
                             )}
                         />
-
-                        {/* Erro do servidor */}
-                        {serverError && (
-                            <div className="p-3 text-sm bg-red-50 text-red-600 rounded-md">
-                                {serverError}
-                            </div>
-                        )}
 
                         {/* Botão de Submit */}
                         <Button 
