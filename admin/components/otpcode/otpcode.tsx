@@ -9,60 +9,55 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
-
-import { Label } from "@/components/ui/label"
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "../ui/input-otp"
 
 export function OtpCode() {
-     const [value, setValue] = React.useState("")
+    const [value, setValue] = React.useState("")
     return (
-        <Card className="w-full max-w-sm">
-            <CardHeader>
-                <CardTitle>Recupere sua senha</CardTitle>
-                <CardDescription>
-                    Informe seu número de telefone angolano abaixo para receber um código e redefinir sua senha.
-                </CardDescription>
-            </CardHeader>
+        <Card className="w-full max-w-sm ">
+            <form >
+                <CardHeader className="text-center mb-2">
+                    <CardTitle>Verificação de segurança</CardTitle>
+                    <CardDescription className="mb-5 text-gray-500">
+                        Digite o código recebido para continuar a recuperação da senha.
+                    </CardDescription>
+                </CardHeader>
 
-            <CardContent>
-                <form className="flex flex-col gap-6">
-                    <div className="grid gap-2">
-                        <Label htmlFor="phone">Telefone</Label>
-                        <div className="space-y-2">
-                            <InputOTP
-                                maxLength={6}
-                                value={value}
-                                onChange={(value) => setValue(value)}
-                            >
-                                <InputOTPGroup>
-                                    <InputOTPSlot index={0} />
-                                    <InputOTPSlot index={1} />
-                                    <InputOTPSlot index={2} />
-                                    <InputOTPSlot index={3} />
-                                    <InputOTPSlot index={4} />
-                                    <InputOTPSlot index={5} />
-                                </InputOTPGroup>
-                            </InputOTP>
-                            <div className="text-center text-sm">
-                                {value === "" ? (
-                                    <>Enter your one-time password.</>
-                                ) : (
-                                    <>You entered: {value}</>
-                                )}
-                            </div>
+                <CardContent>
+                    <div className="flex flex-col items-center gap-4 mb-4">
+                        <InputOTP
+                            maxLength={6}
+                            value={value}
+                            onChange={(value) => setValue(value)}
+                        >
+                            <InputOTPGroup>
+                                <InputOTPSlot index={0} />
+                                <InputOTPSlot index={1} />
+                                <InputOTPSlot index={2} />
+                                <InputOTPSlot index={3} />
+                                <InputOTPSlot index={4} />
+                                <InputOTPSlot index={5} />
+                            </InputOTPGroup>
+                        </InputOTP>
+                        <div className="text-center text-sm text-zinc-600">
+                            {value === "" ? (
+                                <>Digite o código de 6 dígitos que recebeu por SMS.</>
+                            ) : (
+                                <>Código digitado: <span className="font-medium">{value}</span></>
+                            )}
                         </div>
                     </div>
-                </form>
-            </CardContent>
+                </CardContent>
 
-            <CardFooter className="flex-col gap-2">
-                <Button type="submit" className="w-full bg-[#ED5379] hover:bg-[#f11f54]">
-                    Enviar código
-                </Button>
-                <p className="text-xs text-zinc-500 text-center">
-                    Você receberá um código via SMS para redefinir sua senha.
-                </p>
-            </CardFooter>
+                <CardFooter className="flex-col gap-2">
+                    <Button type="submit" className="w-full bg-[#ED5379] hover:bg-[#f11f54]">
+                        Confirmar código
+                    </Button>
+                    <p className="text-xs text-zinc-500 text-center">
+                        Não partilhe este código com ninguém. Ele é válido por alguns minutos.
+                    </p>
+                </CardFooter>
+            </form>
         </Card>
 
     )
