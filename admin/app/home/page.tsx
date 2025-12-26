@@ -1,5 +1,7 @@
+import { OrderCard } from "@/components/card-pedidos/cardpedidos";
+
 export default function Home() {
-    
+
     return (
         <div>
             <div className="flex items-center justify-between mt-4">
@@ -99,20 +101,25 @@ export default function Home() {
                 </article>
             </div>
             <div className="flex flex-col lg:flex-row gap-6">
+                {/* Novos Pedidos */}
 
-                {/* Conteúdo principal */}
+
                 <section className="flex-1 overflow-x-auto mt-10">
 
 
                 </section>
+                {/* Conteúdo principal */}
 
-                {/* Novos Pedidos */}
-                <section className="w-full lg:w-120 shrink-0 mt-4">
+                <section className="w-full lg:w-120 shrink-0 mt-4 border rounded-lg p-6 bg-white">
 
-                    <h2 className="text-xl font-bold">
+                    <h2 className="text-xl font-bold mb-2">
                         Novos Pedidos
                     </h2>
-
+                    <OrderCard />
+                    <OrderCard />
+                    <OrderCard />
+                    <OrderCard />
+                    <OrderCard />
                 </section>
 
             </div>
