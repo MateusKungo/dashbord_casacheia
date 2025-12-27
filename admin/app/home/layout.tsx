@@ -15,7 +15,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
         {/* Conteúdo principal */}
         <main className="flex-1 rounded-md border bg-background  p-4">
-           
+            
           <SidebarTrigger />
           {children}
         </main>

@@ -10,16 +10,22 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import Image from "next/image"
 
 export function RecuperarSenha() {
     return (
         <Card className="w-full max-w-sm">
-            <CardHeader>
-                <CardTitle>Recupere sua senha</CardTitle>
-                <CardDescription>
+            <div className="flex flex-col items-center justify-center space-x-2 mt-4">
+                <Image src="/logo.png" alt="Logo" width={100} height={100} />
+                <h1 className="text-2xl">Recupere sua senha</h1>
+
+
+                <CardDescription className="text-center">
                     Informe seu número de telefone angolano abaixo para receber um código e redefinir sua senha.
                 </CardDescription>
-            </CardHeader>
+
+            </div>
+
 
             <CardContent>
                 <form className="flex flex-col gap-6">
@@ -32,7 +38,7 @@ export function RecuperarSenha() {
                             required
                             className="placeholder:text-zinc-400"
                         />
-                        <p className="text-sm text-zinc-500">
+                        <p className="text-sm text-zinc-500 text-center">
                             Digite seu número com o código do país (+244). Ex.: +244 923 456 789
                         </p>
                     </div>

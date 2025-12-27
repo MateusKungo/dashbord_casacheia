@@ -20,6 +20,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Loader2 } from "lucide-react"
 import { toast } from "sonner"
 import { BASE_URL } from "@/lib/api"
+import Image from "next/image"
 
 // Schema de validação com Zod
 const signupSchema = z.object({
@@ -28,7 +29,7 @@ const signupSchema = z.object({
         .max(100, "Nome muito longo")
         .regex(/^[a-zA-ZÀ-ÿ\s]+$/, "Nome deve conter apenas letras")
         .transform(name => name.trim()),
-    
+
     telefone: z.string()
         .min(9, "Telefone deve ter pelo menos 9 dígitos")
         .max(15, "Telefone muito longo")
@@ -37,14 +38,14 @@ const signupSchema = z.object({
             const numbers = phone.replace(/\D/g, '')
             return numbers.replace(/(\d{3})(\d{3})(\d{3})/, '$1 $2 $3')
         }),
-    
+
     senha: z.string()
         .min(6, "Senha deve ter pelo menos 6 caracteres")
         .max(50, "Senha muito longa")
         .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/, {
             message: "Senha deve conter pelo menos uma letra maiúscula, uma minúscula e um número"
         }),
-    
+
     confirmarSenha: z.string()
 }).refine((data) => data.senha === data.confirmarSenha, {
     message: "As senhas não coincidem",
@@ -73,11 +74,11 @@ export default function Signup() {
     // Função para formatar telefone enquanto digita
     const formatPhoneInput = (value: string) => {
         const numbers = value.replace(/\D/g, '')
-        
+
         if (numbers.length === 0) return ""
         if (numbers.length <= 3) return numbers
-        if (numbers.length <= 6) return `${numbers.slice(0,3)} ${numbers.slice(3)}`
-        return `${numbers.slice(0,3)} ${numbers.slice(3,6)} ${numbers.slice(6,9)}`
+        if (numbers.length <= 6) return `${numbers.slice(0, 3)} ${numbers.slice(3)}`
+        return `${numbers.slice(0, 3)} ${numbers.slice(3, 6)} ${numbers.slice(6, 9)}`
     }
 
     // Função de submit
@@ -87,7 +88,7 @@ export default function Signup() {
         try {
             // Aqui você faria a chamada à API para criar a conta
             console.log("Dados validados para cadastro:", data)
-            
+
             // Exemplo de chamada à API
             const response = await fetch(`${BASE_URL}/auth/register`, {
                 method: 'POST',
@@ -108,13 +109,13 @@ export default function Signup() {
             }
 
             const result = await response.json()
-            
+
             // Sucesso - redirecionar ou mostrar mensagem
             toast.success("Conta criada com sucesso!", {
                 description: "Você será redirecionado para a página de login.",
             })
             router.push('/auth/login')
-            
+
             // Limpar formulário
             form.reset()
 
@@ -130,6 +131,10 @@ export default function Signup() {
 
     return (
         <Card className="w-full max-w-sm">
+            <div className="flex flex-col items-center justify-center space-x-2 mt-4 mb-6">
+                <Image src="/logo.png" alt="Logo" width={100} height={100} />
+                <h1 className="text-2xl">Criar Conta</h1>
+            </div>
             <CardHeader>
                 <CardTitle>Criar uma conta</CardTitle>
                 <CardDescription>
@@ -222,8 +227,8 @@ export default function Signup() {
                         />
 
                         {/* Botão de Submit */}
-                        <Button 
-                            type="submit" 
+                        <Button
+                            type="submit"
                             className="w-full cursor-pointer bg-[#ED5379] hover:bg-[#f11f54]"
                             disabled={isLoading || !form.formState.isValid}
                         >
@@ -245,8 +250,8 @@ export default function Signup() {
                 </p>
                 <div className="text-sm text-center">
                     Já tem uma conta?{" "}
-                    <Link 
-                        href="/auth/login" 
+                    <Link
+                        href="/auth/login"
                         className="text-[#ED5379] hover:text-[#f11f54] underline"
                     >
                         Faça login

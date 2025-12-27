@@ -10,19 +10,20 @@ import {
     CardTitle,
 } from "@/components/ui/card"
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "../ui/input-otp"
+import Image from "next/image"
 
 export function OtpCode() {
     const [value, setValue] = React.useState("")
     return (
         <Card className="w-full max-w-sm ">
+            <div className="flex flex-col items-center justify-center space-x-2 mt-4">
+                <Image src="/logo.png" alt="Logo" width={100} height={100} />
+                <h1 className="text-2xl">Verificação de segurança</h1>
+                <CardDescription className=" text-gray-500 text-center">
+                    Digite o código recebido para continuar a recuperação da senha.
+                </CardDescription>
+            </div>
             <form >
-                <CardHeader className="text-center mb-2">
-                    <CardTitle>Verificação de segurança</CardTitle>
-                    <CardDescription className="mb-5 text-gray-500">
-                        Digite o código recebido para continuar a recuperação da senha.
-                    </CardDescription>
-                </CardHeader>
-
                 <CardContent>
                     <div className="flex flex-col items-center gap-4 mb-4">
                         <InputOTP

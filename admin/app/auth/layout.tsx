@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function AuthLayout({
   children,
 }: {
@@ -6,6 +8,7 @@ export default function AuthLayout({
   return (
     <div className="flex h-screen font-sans overflow-hidden bg-white">
       {/* Lado esquerdo - Formulário */}
+      
       <div className="flex w-full md:w-1/2 items-center justify-center  px-6">
         {children}
       </div>

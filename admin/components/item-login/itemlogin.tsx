@@ -22,11 +22,12 @@ import { Input } from "@/components/ui/input"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { cn } from "@/lib/utils"
 import { BASE_URL } from "@/lib/api"
+import Image from "next/image"
 
 // Zod schema for validation
 const loginSchema = z.object({
-  telefone: z.string().min(9, { message: "O telefone deve ter pelo menos 9 dígitos." }),
-  senha: z.string().min(6, { message: "A senha deve ter pelo menos 6 caracteres." }),
+    telefone: z.string().min(9, { message: "O telefone deve ter pelo menos 9 dígitos." }),
+    senha: z.string().min(6, { message: "A senha deve ter pelo menos 6 caracteres." }),
 });
 
 type LoginFormValues = z.infer<typeof loginSchema>;
@@ -83,6 +84,10 @@ export default function Login() {
 
     return (
         <Card className="w-full max-w-sm">
+            <div className="flex flex-col items-center justify-center space-x-2 mt-4 mb-6">
+                <Image src="/logo.png" alt="Logo" width={100} height={100} />
+                <h1 className="text-2xl">Login</h1>
+            </div>
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)}>
                     <CardHeader>
@@ -126,12 +131,12 @@ export default function Login() {
                                         </Link>
                                     </div>
                                     <FormControl>
-                                        <Input 
-                                            type="password" 
-                                            required 
-                                            placeholder="*******" 
+                                        <Input
+                                            type="password"
+                                            required
+                                            placeholder="*******"
                                             disabled={isLoading}
-                                            {...field} 
+                                            {...field}
                                         />
                                     </FormControl>
                                     <FormMessage />
@@ -140,8 +145,8 @@ export default function Login() {
                         />
                     </CardContent>
                     <CardFooter className="flex-col m-2 gap-2">
-                        <Button 
-                            type="submit" 
+                        <Button
+                            type="submit"
                             className="w-full cursor-pointer bg-[#ED5379] hover:bg-[#f11f54]"
                             disabled={isLoading || !form.formState.isValid}
                         >
@@ -155,7 +160,7 @@ export default function Login() {
                             )}
                         </Button>
                         <p className="text-sm text-muted-foreground">ou</p>
-                        <Link href="/auth/singup" className={cn(buttonVariants({variant:"outline"})," w-full")}>
+                        <Link href="/auth/singup" className={cn(buttonVariants({ variant: "outline" }), " w-full")}>
                             Criar uma conta
                         </Link>
                     </CardFooter>
