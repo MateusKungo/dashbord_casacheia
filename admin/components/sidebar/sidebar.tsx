@@ -1,4 +1,4 @@
-import { Calendar, Home, Inbox, Search, Settings } from "lucide-react"
+import { BarChart, Calendar, DollarSign, Home, Inbox, Package, Search, Settings, Users, Warehouse } from "lucide-react"
 
 import {
   Sidebar,
@@ -12,12 +12,15 @@ import {
 } from "@/components/ui/sidebar"
 
 const items = [
-  { title: "Home", url: "#", icon: Home },
-  { title: "Inbox", url: "#", icon: Inbox },
-  { title: "Calendar", url: "#", icon: Calendar },
-  { title: "Search", url: "#", icon: Search },
-  { title: "Settings", url: "#", icon: Settings },
-]
+  { title: "Dashboard", url: "/dashboard", icon: Home, description: "Visão geral das vendas" },
+  { title: "Pedidos", url: "/pedidos", icon: Inbox, description: "Gerenciar pedidos" },
+  { title: "Produtos", url: "/produtos", icon: Package, description: "Catálogo de produtos" },
+  { title: "Clientes", url: "/clientes", icon: Users, description: "Gerenciar clientes" },
+  { title: "Relatórios", url: "/relatorios", icon: BarChart, description: "Relatórios de vendas" },
+  { title: "Estoque", url: "/estoque", icon: Warehouse, description: "Controle de estoque" },
+  { title: "Financeiro", url: "/financeiro", icon: DollarSign, description: "Fluxo de caixa" },
+  { title: "Configurações", url: "/configuracoes", icon: Settings, description: "Configurações do sistema" },
+];
 
 export function AppSidebar() {
   return (

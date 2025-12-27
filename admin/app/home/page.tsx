@@ -1,4 +1,5 @@
 import { OrderCard } from "@/components/card-pedidos/cardpedidos";
+import { ChartPedidos } from "@/components/chart-pedidos/chartpedidos";
 
 export default function Home() {
 
@@ -106,6 +107,12 @@ export default function Home() {
 
                 <section className="flex-1 overflow-x-auto mt-10">
 
+                    <h2 className="text-xl font-bold mb-2">
+                        Pedidos nos Últimos Meses
+                    </h2>
+                    <p className="text-gray-500 mb-2">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tempore minus, quidem tenetur.?</p>
+                    {/* ChartPedidos component */}  
+                    <ChartPedidos />
 
                 </section>
                 {/* Conteúdo principal */}
